@@ -2129,7 +2129,7 @@ namespace hpl {
 			if(apNode->msSource != "")
 			{
 				//Get number of chars in prefix.
-				int lPrefixChars =1;
+				unsigned int lPrefixChars =1;
 				while(	lPrefixChars < apNode->msName.size() &&	
 						apNode->msName[lPrefixChars]!= '_' &&
 						apNode->msName[lPrefixChars]!='\0') {
@@ -2337,7 +2337,7 @@ namespace hpl {
 				//Get portal number
 
 				//Get digits in num:
-				int lDigits =1;
+				unsigned int lDigits =1;
 				while(apNode->msName[7+lDigits] != '_' && apNode->msName[7+lDigits] != 0) lDigits++;
 
 				//get string and convert to int
@@ -2351,7 +2351,7 @@ namespace hpl {
 				// Get target room
 
 				//Get the char pos for the target room
-				int lStartChar = 7 + lDigits + 1;
+				unsigned int lStartChar = 7 + lDigits + 1;
 				tString sTest = cString::ToLowerCase(cString::Sub(apNode->msName,lStartChar, 4));
 				if(sTest != "room"){
 					Error("Bad portal id 's'!\n", apNode->msName.c_str());
