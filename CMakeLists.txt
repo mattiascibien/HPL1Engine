@@ -15,22 +15,22 @@ file(GLOB_RECURSE all_sources
 )
 IF(WIN32)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-
-	list(REMOVE_ITEM all_sources *posix.cpp)
+	file(GLOB_RECURSE to_remove_all posix.cpp )
 ELSE()
-	list(REMOVE_ITEM all_sources win32.cpp Video*Theora.cpp)
+	file(GLOB_RECURSE to_remove_all win32.cpp Video*Theora.cpp)
 ENDIF()
 
+list(REMOVE_ITEM all_sources ${to_remove_all})
 
 list(REMOVE_DUPLICATES all_sources)
 
 add_library(HPL STATIC ${all_sources})
-#
+
 add_library(Newton STATIC IMPORTED)
 set_target_properties(Newton PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/win32/newton.lib)
-#
+
 add_library(angelscript STATIC IMPORTED)
 set_target_properties(angelscript PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/win32/angelscript.lib)
-#
+
 add_library(SDLmain STATIC IMPORTED)
 set_target_properties(SDLmain PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/lib/win32/SDLmain.lib)
